@@ -7,15 +7,15 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    width: 100%;
-    background-color: rgba(240, 240, 240, 1);
+    max-width: 100%;
 }
 .menu {
     list-style-type: none;
     display: flex;
-    gap: 20px;
-    padding: 0;
-    margin: 0;
+    gap: 70px;
+    padding: 0px;
+    margin: 0px;
+   margin-left: auto;
 }
 .menu a {
     text-decoration: none;
@@ -25,8 +25,90 @@ body {
 .book-button {
     background-color: rgba(13, 50, 45, 1);
     color: white;
-    padding: 10px 20px;
+    padding: 15px 25px;
     border-radius: 5px;
     text-decoration: none;
     font-size: 13px;
+    margin-left: 12%;
+    margin-right: 50px;
+    border: none;
+}
+#image-container{
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    max-width: 100%;
+}
+#image-container img{
+    width: 100%;
+    display: block;
+    height: 700px;
+}
+.buttons{
+    display: flex;
+    justify-content: center;
+    margin-top: 17px;
+    gap: 25px;
+}
+.text{
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+.text h2{
+    margin: 0;
+    font-size: 88px;
+    font-weight: 400;
+}
+.text p{
+    margin: 5px 0;
+    font-size: 17px;
+    opacity: 80%;
+}
+.butoni1{
+    background-color: rgba(13, 50, 45, 1);
+    color: white;
+    border: none;
+}
+.butoni2{
+    background-color: transparent;
+    color: rgba(13, 50, 45, 1);
+    font-weight: bold;
+    border: 2px solid white;
+}
+.butoni1, .butoni2{
+    width: 140px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.book-room {
+  position: absolute;
+  bottom: 20px;
+  background-color: rgba(13, 50, 45, 0.7);
+  width: 100%;
+  padding: 20px; 
+  display: flex;
+  justify-content: space-between;
+  opacity: 70%;
+  top: 200%;
+  height: 100px;
+  box-sizing: border-box;
+}
+.book-room input,
+.book-room button {
+  width: 22%; 
+  padding: 10px;
+  border: none;
+  font-size: 16px;
+}
+.book-room button {
+  background-color: #fff; 
+  color: rgba(13, 50, 45, 1); 
+  font-weight: bold;
+  cursor: pointer;
 }
