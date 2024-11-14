@@ -87,28 +87,35 @@ body {
     font-size: 16px;
 }
 .book-room {
-  position: absolute;
-  bottom: 20px;
   background-color: rgba(13, 50, 45, 0.7);
-  width: 100%;
-  padding: 20px; 
+  width: 80%;
+  padding: 15px; 
+  padding-top: 22px;
   display: flex;
-  justify-content: space-between;
-  opacity: 70%;
-  top: 200%;
-  height: 100px;
+  opacity: 80%;
+  height: 90px;
   box-sizing: border-box;
+  margin-left: 10%;
+  text-align: center;
+  justify-content: center;
+  position: absolute;
+  top: 725px;
+}
+.book-room input{
+  width: 17%;
 }
 .book-room input,
 .book-room button {
-  width: 22%; 
   padding: 10px;
   border: none;
   font-size: 16px;
+  margin-right: 2px;
 }
-.book-room button {
-  background-color: #fff; 
-  color: rgba(13, 50, 45, 1); 
+#buttoncheck {
+  background-color: rgba(13, 50, 45, 1); 
+  color: white; 
   font-weight: bold;
   cursor: pointer;
+  width: 20%;
+  opacity: 100%;
 }
