@@ -165,14 +165,14 @@ hr{
     margin: 50px 120px;
     opacity: 70%;
 }
-.rooms{
+.rooms, .events, .dining{
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 400px;
     box-sizing: border-box;
 }
-.rooms .room-text{
+.rooms .room-text, .events .event-text, .dining .dining-text, .yoga .yoga-text,.pet-friendly .pet-text, .spa .spa-text{
     padding: 17px;
     font-size: 17px;
     border: 1px solid rgb(220,220,220);
@@ -180,12 +180,15 @@ hr{
     opacity: 70%;
     font-family: 'Montaga', serif;
 }
-.rooms .room-text p{
+.rooms .room-text p, .events .event-text p, .dining .dining-text p, .yoga .yoga-text p,.pet-friendly .pet-text p, .spa .spa-text p{
     opacity: 60%;
 }
-.rooms .room-text a{
+.rooms .room-text a, .events .event-text a, .dining .dining-text a, .yoga .yoga-text a,.pet-friendly .pet-text a, .spa .spa-text a{
     text-decoration:none;
     float: right;
     font-size: 30px;
     margin-right: 10px;
+}
+.service{
+    display: flex;
 }
