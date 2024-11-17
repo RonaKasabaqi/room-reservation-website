@@ -223,3 +223,27 @@ hr{
     border-radius: 5px;
     background-color: rgba(217, 217, 217, 1);
 }
+.container .part2{
+    color: white;
+    line-height: 1.6;
+}
+.container .part2 li a,.container .part3 li a{
+    text-decoration: none;
+    color: white;
+    opacity: 80%;
+}
+.container .part2 li,.container .part3 li{
+    list-style-type: none;
+}
+.container .part2 li a:hover,.container .part3 li a:hover{
+    opacity: 1;
+}
+.part2 h2,.part3 h2{
+    opacity: 90%;
+    color: white;
+    font
+}
+.container .part3 li{
+    color: white;
+    padding: 7px;
+}
