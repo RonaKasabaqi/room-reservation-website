@@ -192,3 +192,34 @@ hr{
 .service{
     display: flex;
 }
+.comments {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+.comments .comment-1 {
+    color: rgba(13, 50, 45, 1);
+    font-size: 20px;
+    text-align: center;
+    width: 650px;
+    margin-top: 8%;
+    font-family: 'Noto Sans SC', sans-serif;
+}
+.footer{
+    background-color: rgba(13, 50, 45, 1);
+    height: 300px;
+}
+.footer .container .part1{
+    color: white;
+    font-size: 18px;
+    padding: 50px;
+}
+.footer .container .part1 p{
+    opacity: 80%;
+}
+.part1 input{
+    height: 40px;
+    width: 250px;
+    border-radius: 5px;
+    background-color: rgba(217, 217, 217, 1);
+}
