@@ -311,7 +311,7 @@ html {
   box-sizing: border-box;
 }
 
-.container {
+.myContainer {
   max-width: 1300px;
   margin: 0 auto;
 }
@@ -328,6 +328,11 @@ a {
 .img-responsive {
   display: block;
   max-width: 100%;
+  height: auto;
+}
+.myimg-responsive {
+  display: block;
+  width: 100%;
   height: auto;
 }
 
@@ -518,4 +523,122 @@ Sea View Section
   color: #000;
   font-weight: 400;
   margin: 0 auto;
+}
+
+/* ---------------------------
+Grande Suite Section
+--------------------------- */
+#grandeSuite {
+  margin-top: 100px;
+  padding: 50px 0;
+  position: relative;
+  z-index: 9;
+}
+#grandeSuite::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 60%;
+  bottom: 0;
+  left: 0;
+  background-color: #0d322d10;
+  z-index: -1;
+}
+
+#grandeSuite .textGrande h5 {
+  font-family: "Montaga", serif;
+  font-size: 36px;
+  line-height: 46px;
+  color: #000;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+#grandeSuite .textGrande p {
+  font-family: "Montaga", serif;
+  font-size: 32px;
+  line-height: 42px;
+  color: #000;
+  font-weight: 400;
+  margin: 0 auto;
+  width: 70%;
+}
+
+/* ---------------------------
+Book Section
+--------------------------- */
+#book {
+  position: relative;
+  background-color: #0d322d70;
+  margin-top: 130px;
+  border-radius: 35px;
+}
+#book .textAbsolute {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#book img {
+  opacity: 0.7;
+}
+#book .textAbsolute h5 {
+  font-family: "Montaga", serif;
+  font-size: 36px;
+  line-height: 46px;
+  color: #fff;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+#book .textAbsolute p {
+  font-family: "Montaga", serif;
+  font-size: 32px;
+  line-height: 42px;
+  color: #fff;
+  font-weight: 400;
+  margin: 0 auto;
+  width: 70%;
+}
+
+/* ---------------------------
+Footer Section
+--------------------------- */
+
+#myFooter .flexItems {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+#myFooter .flexItems h5 {
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  line-height: 34px;
+  color: #000;
+}
+#myFooter .flexItems .social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+#myFooter .flexItems .social li {
+  list-style: none;
+}
+#myFooter .flexItems .social li a {
+  display: inline-block;
+}
+#myFooter .flexItems .social li a img {
+  transition: all 0.4s ease;
+}
+#myFooter .flexItems .social li a img:hover {
+  transform: scale(1.03);
 }
