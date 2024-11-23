@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <script src="script.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Aboreto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montaga&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
@@ -25,17 +26,49 @@
             </ul>
             <a class="book-button" href="#">BOOK NOW</a>
         </nav>
-        <div id="image-container">
-            <img src="images/photo1.jpg" alt="Photo 1">
-            <div class="text">
+        <div class="slideshow-container">
+
+            <div class="mySlides fade">
+              <img src="images/photo1.jpg" alt="Photo 1">
+              <div class="text">
                 <h2>Spend Your Holiday</h2>
-                <p>Discover Your perfect Escape - Where Comfort Meets Luxury</p>
-            <div class="buttons">
-                <button class="butoni1">Read More</button>
-                <button class="butoni2">Contact Us</button>
+                <p>Discover Your Perfect Escape - Where Comfort Meets Luxury</p>
+                <div class="buttons">
+                  <button class="butoni1">Read More</button>
+                  <button class="butoni2">Contact Us</button>
+                </div>
+              </div>
             </div>
+          
+            <div class="mySlides fade">
+              <img src="images/Exclusive-Use.jpg" alt="Photo 2">
+              <div class="text">
+                <h2>Enjoy the Adventure</h2>
+                <p>Embark on a journey filled with unforgettable moments and endless possibilities.</p> 
+                <div class="buttons">
+                  <button class="butoni1" >Read More</button>
+                  <button class="butoni2" style="color:white">Contact Us</button>
+                </div>
+              </div>
             </div>
-        </div>
+
+            <div class="mySlides fade">
+                <img src="images/view.jpg" alt="Photo 2">
+                <div class="text">
+                  <h2>Discover new horizons</h2>
+                  <p>Experience the Thrill of Nature Like Never Before</p>
+                  <div class="buttons">
+                    <button class="butoni1">Read More</button>
+                    <button class="butoni2" style="color:white">Contact Us</button>
+                  </div>
+                </div>
+              </div>
+          
+            <a class="prev" onclick="changeSlide(-1)">❮</a>
+            <a class="next" onclick="changeSlide(1)">❯</a>
+          
+          </div>
+
         <div class="book-room">
             <form>
                <input type="date" name="checkin" id="checkin" placeholder="Check in">

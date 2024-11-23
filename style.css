@@ -51,22 +51,20 @@ body {
   margin-right: 50px;
   border: none;
 }
-#image-container {
-  width: 100%;
+/*----------------------------------------*/
+.slideshow-container {
   position: relative;
-  margin: 0 auto;
-  max-width: 100%;
+  margin: auto;
+  overflow: hidden;
 }
-#image-container img {
+.mySlides {
+  display: none;
+  position: relative;
+}
+.mySlides img {
   width: 100%;
-  display: block;
   height: 700px;
-}
-.buttons {
-  display: flex;
-  justify-content: center;
-  margin-top: 17px;
-  gap: 25px;
+  display: block;
 }
 .text {
   position: absolute;
@@ -79,32 +77,88 @@ body {
 }
 .text h2 {
   margin: 0;
-  font-size: 88px;
+  font-size: 48px;
   font-weight: 400;
 }
 .text p {
-  margin: 5px 0;
-  font-size: 17px;
-  opacity: 80%;
+  margin: 10px 0;
+  font-size: 18px;
+  opacity: 0.9;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  gap: 15px;
 }
 .butoni1 {
   background-color: rgba(13, 50, 45, 1);
   color: white;
   border: none;
+  width: 140px;
+  height: 45px;
+  cursor: pointer;
+  font-size: 16px;
 }
 .butoni2 {
   background-color: transparent;
   color: rgba(13, 50, 45, 1);
   font-weight: bold;
   border: 2px solid white;
-}
-.butoni1,
-.butoni2 {
   width: 140px;
-  height: 50px;
+  height: 45px;
   cursor: pointer;
   font-size: 16px;
 }
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 10px;
+  margin-top: -20px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  user-select: none;
+  z-index: 1000;
+}
+.prev {
+  left: 10px;
+}
+.next {
+  right: 10px;
+}
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+.change-content {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.change-content.left {
+  left: 20px;
+}
+
+.change-content.right {
+  right: 20px;
+}
+
+.change-content:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+/*----------------------------------------*/
 .book-room {
   background-color: rgba(13, 50, 45, 0.7);
   width: 80%;
