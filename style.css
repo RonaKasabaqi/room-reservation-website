@@ -2,6 +2,9 @@ body {
   margin: 0;
   padding: 0;
 }
+.text-center {
+  text-align: center;
+}
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -297,6 +300,12 @@ html {
 #main {
   overflow: hidden;
 }
+.customMargin {
+  margin: 50px 0;
+}
+.half {
+  width: 50%;
+}
 
 * {
   box-sizing: border-box;
@@ -409,4 +418,104 @@ Second Navbar
 #secondNavbar ul.secondNav li:hover a,
 #secondNavbar ul.secondNav li.active a {
   color: #fff;
+}
+/* ---------------------------
+Elegant Section
+--------------------------- */
+#elegant {
+  position: relative;
+  background-color: #0d322d10;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+#elegant .elegant_text h5 {
+  font-family: "Montaga", serif;
+  font-size: 36px;
+  line-height: 46px;
+  color: #000;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 20px;
+}
+#elegant .elegant_text p {
+  font-family: "Montaga", serif;
+  font-size: 32px;
+  line-height: 42px;
+  color: #000;
+  font-weight: 400;
+  margin: 0 auto;
+  width: 70%;
+}
+.roomButton {
+  background-color: #0d322d;
+  padding: 25px 35px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  line-height: 24px;
+  color: #fff;
+  display: inline-block;
+  transition: all 0.4s ease;
+  border: 2px solid transparent;
+}
+.roomButton:hover {
+  background-color: #fff;
+  color: #0d322d;
+  border: 2px solid #0d322d;
+}
+
+/* ---------------------------
+Junior Suite Section
+--------------------------- */
+
+#juniorSuite {
+  padding: 50px 0;
+}
+#juniorSuite .juniorText {
+  padding-left: 60px;
+  margin-top: 50px;
+}
+#juniorSuite .juniorText h5 {
+  font-family: "Montaga", serif;
+  font-size: 36px;
+  line-height: 46px;
+  color: #000;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 20px;
+}
+#juniorSuite .juniorText p {
+  font-family: "Montaga", serif;
+  font-size: 32px;
+  line-height: 42px;
+  color: #000;
+  font-weight: 400;
+  margin: 0 auto;
+}
+
+/* ---------------------------
+Sea View Section
+--------------------------- */
+#seaView {
+  padding: 50px 0;
+}
+#seaView .seaText {
+  padding-right: 60px;
+  margin-top: 50px;
+}
+#seaView .seaText h5 {
+  font-family: "Montaga", serif;
+  font-size: 36px;
+  line-height: 46px;
+  color: #000;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 20px;
+}
+#seaView .seaText p {
+  font-family: "Montaga", serif;
+  font-size: 32px;
+  line-height: 42px;
+  color: #000;
+  font-weight: 400;
+  margin: 0 auto;
 }
