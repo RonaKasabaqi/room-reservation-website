@@ -299,47 +299,74 @@ hr {
 .footer {
   background-color: rgba(13, 50, 45, 1);
   height: 300px;
+  color: #fff;
+  padding: 0 25px;
+}
+.footer .container{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
 }
 .footer .container .part1 {
-  color: white;
   font-size: 18px;
   padding: 50px;
+  color: #d9d9d9;
 }
 .footer .container .part1 p {
   opacity: 80%;
+  padding-right: 30px;
+}
+.footer .container .part1 #submit{
+  color: white;
+  font-size: 15px;
+  background-color: rgb(88, 132, 107);
+  border: white;
+  height: 38px;
+  width: 140px;
 }
 .part1 input {
   height: 40px;
   width: 250px;
   border-radius: 5px;
   background-color: rgba(217, 217, 217, 1);
+  padding: 5px;
 }
-.container .part2 {
-  color: white;
-  line-height: 1.6;
+.footer .container .part2,
+.footer .container .part3,
+.footer .container .part4{
+  flex: 1;
+  padding: 10px;
 }
 .container .part2 li a,
-.container .part3 li a {
+.container .part3 li a,
+.container .part4 li a {
   text-decoration: none;
   color: white;
   opacity: 80%;
+  transition: opacity 0.3s ease;
 }
 .container .part2 li,
-.container .part3 li {
+.container .part3 li,
+.container .part4 li {
   list-style-type: none;
 }
 .container .part2 li a:hover,
-.container .part3 li a:hover {
+.container .part3 li a:hover,
+.container .part4 li a:hover{
   opacity: 1;
 }
 .part2 h2,
-.part3 h2 {
+.part3 h2,
+.part4 h2 {
   opacity: 90%;
   color: white;
 }
-.container .part3 li {
+.container .part4 li {
   color: white;
   padding: 7px;
+}
+.footer .rights-reserved{
+  color: white;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montaga&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
