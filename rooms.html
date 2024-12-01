@@ -5,6 +5,7 @@
     <title>Room Reservation Page</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
+
   <body>
     <div id="main">
       <nav class="navbar">
@@ -41,7 +42,7 @@
           <div class="row">
             <ul class="secondNav">
               <li class="active">
-                <a href="#">Accommodation</a>
+                <a href="#" class="active">Accommodation</a>
               </li>
               <li>
                 <a href="#">Packages</a>
@@ -54,14 +55,16 @@
         </div>
       </div>
 
-      <div id="banner">
+      <div id="underNavbar">
         <div class="myContainer">
           <div class="row relative">
-            <img
-              src="./images/Rectangle 3.png"
-              alt="Photo2"
-              class="img-responsive"
-            />
+            <div class="imageContainer">
+              <img
+                src="./images/Rectangle 3.png"
+                alt="Photo"
+                class="myimg-responsive"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -215,5 +218,58 @@
         </div>
       </footer>
     </div>
+    <script>
+      const roomData = [
+        {
+          imgSrc: "./images/Rectangle 3.png",
+          title: "Elegant Deluxe Double Room",
+          description: `Indulge in luxury and comfort in our spacious Deluxe Double
+            Room, featuring a blend of rustic charm and refined elegance.
+            Thoughtfully designed to create a cozy ambiance, this room is the perfect
+            retreat to relax and soak in the serene beauty of your surroundings.`,
+        },
+        {
+          imgSrc: "./images/juniorImg.png",
+          title: "Junior Suite",
+          description: `Bring your loved ones and create unforgettable memories in our
+            inviting Junior Suite. Looking for a peaceful moment alone? Step onto your
+            private balcony, take in the charming view of our village below, and breathe
+            in pure relaxation.`,
+        },
+        {
+          imgSrc: "./images/seaViewImg.png",
+          title: "Coastal Haven with Sea View",
+          description: `Awaken to the breathtaking views of the Ionian Sea in our
+            Coastal Haven. This suite features lofty ceilings, polished hardwood floors,
+            and a vibrant color palette inspired by the local landscape, with warm tones
+            of persimmon and white.`,
+        },
+      ];
+
+      function updateContent(index) {
+        const bannerImg = document.querySelector("#underNavbar img");
+        const elegantText = document.querySelector("#elegant h5");
+        const elegantDesc = document.querySelector("#elegant p");
+
+        bannerImg.src = roomData[index].imgSrc;
+        elegantText.textContent = roomData[index].title;
+        elegantDesc.textContent = roomData[index].description;
+      }
+
+      document
+        .querySelectorAll("#secondNavbar ul li a")
+        .forEach((link, index) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            document
+              .querySelector("#secondNavbar ul li a.active")
+              ?.classList.remove("active");
+            link.classList.add("active");
+
+            updateContent(index);
+          });
+        });
+    </script>
   </body>
 </html>
