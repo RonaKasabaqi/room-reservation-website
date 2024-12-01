@@ -717,7 +717,7 @@ Footer Section
 #myFooter .flexItems .social li a {
   display: inline-block;
 }
-#myFooter .flexItems .social li a img {
+#myFooter .flexItems .social li a img {  
   transition: all 0.4s ease;
 }
 #myFooter .flexItems .social li a img:hover {
