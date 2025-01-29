@@ -150,10 +150,10 @@ echo "<script>
     <script>
         let currentIndex = 0;
         function changeSlide(offset) {
-        const slides = document.querySelectorAll(".mySlides"); // Merr diapozitivet
-        slides[currentIndex].style.display = "none"; // Fshih diapozitivin aktual
-        currentIndex = (currentIndex + offset + slides.length) % slides.length; // Përcakton diapozitivin e ri
-        slides[currentIndex].style.display = "block"; // Shfaq diapozitivin e ri
+        const slides = document.querySelectorAll(".mySlides"); 
+        slides[currentIndex].style.display = "none"; 
+        currentIndex = (currentIndex + offset + slides.length) % slides.length; 
+        slides[currentIndex].style.display = "block"; 
         }
         document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".mySlides")[currentIndex].style.display = "block";
