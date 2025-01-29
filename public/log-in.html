@@ -1,3 +1,4 @@
+<?php require_once 'C:\xampp\htdocs\WebProveE\src\validations\LoginValidation.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,25 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Form</title>
     <style>
-        body{
-        margin: 0;
-        padding: 0;
-        background-color: #d1d1d1;
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #d1d1d1;
         }
         .text-center {
-        text-align: center;
+            text-align: center;
         }
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
-            position:fixed;
+            position: fixed;
             background-color: white;
-            width:100%;
-            top:0;
-            left:0;
-            z-index:10;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 10;
         }
         .menu {
             list-style-type: none;
@@ -64,14 +65,14 @@
             margin-right: 50px;
             border: none;
         }
-        .form-container button{
+        .form-container button {
             background-color: rgba(13, 50, 45, 1);
             color: white;
             border-radius: 4px;
             width: 100%;
             height: 35px;
         }
-        .form-container input, .form-container select, textarea{
+        .form-container input, .form-container select, textarea {
             width: calc(100% - 8px);
             padding: 10px;
             margin: 0px auto;
@@ -95,11 +96,26 @@
             transform: translate(-50%, -50%);
         }
         .form-container button:hover {
-            background-color:rgb(2, 107, 93);
+            background-color: rgb(2, 107, 93);
             cursor: pointer;
         }
-        .form-container h1{
+        .form-container h1 {
             color: rgba(13, 50, 45, 1);
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+        .register-link {
+            margin-top: 15px;
+            font-size: 12px;
+            color: rgb(91, 91, 91);
+        }
+        .register-link a {
+            text-decoration: none;
+            font-weight: bold;
+            color: black;
         }
     </style>
 </head>
@@ -108,40 +124,28 @@
         <nav class="navbar">
             <img src="images/logo.png" alt="" style="width: 200px; height: 35px; margin-left: 65px;">
             <ul class="menu">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="index.php" class="active">Home</a></li>
+                <li><a href="rooms.php">Rooms</a></li>
                 <li><a href="#">Dining</a></li>
                 <li><a href="#">Events</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
-                <a class="register-button" href="register.html">Register</a>
-                <a class="login-button" href="log-in.html">Log in</a>
+                <a class="login-button" href="log-in.php">Log in</a>
             </ul>
             <a class="book-button" href="#">BOOK NOW</a>
         </nav>
     </div>
     <div class="form-container">
-        <form id="loginForm">
+        <form method="POST" action="">
             <h1>Log in</h1>
-            <input type="text" id="email" placeholder="Email">
-            <input type="password" id="password" placeholder="Password">
+            <?php if (!empty($error)): ?>
+                <div class="error"> <?= htmlspecialchars($error) ?> </div>
+            <?php endif; ?>
+            <input type="text" name="email" id="email" placeholder="Email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+            <input type="password" name="password" id="password" placeholder="Password">
             <button type="submit">Log in</button>
         </form>
+        <p class="register-link">Don't have an account? <a href="register.php">Sign up</a></p>
     </div>
-    <script>
-        document.getElementById("loginForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-    
-            const email = document.getElementById("email").value.trim();
-            const password = document.getElementById("password").value.trim();
-    
-            if (email.includes('@') && email.includes('.')) {
-                window.location.href = "index.html"; 
-            } else {
-                alert("Please enter a valid email address.");
-            }
-        });
-    </script>
-    
 </body>
 </html>

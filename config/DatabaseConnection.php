@@ -1,0 +1,14 @@
+<?php
+$server = "localhost";
+$username = "root";
+$password = "";
+$database = "hotel";
+
+$conn = mysqli_connect($server, $username, $password, $database);
+
+if(!$conn){
+    die("Error: ".mysqli_connect_error());
+}else{
+    echo "Lidhja me DB eshte OK";
+}
+?>
