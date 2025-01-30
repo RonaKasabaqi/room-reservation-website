@@ -33,7 +33,7 @@ echo "<script>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
                 <a class="register-button" href="register.html">Register</a>
-                <a class="login-button" href="log-in.html">Log in</a>
+                <a class="login-button" href="log-in.php">Log in</a>
             </ul>
             <a class="book-button" href="#">BOOK NOW</a>
         </nav>

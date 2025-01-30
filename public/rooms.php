@@ -16,15 +16,15 @@
         <img src="images/logo.png" alt="" style="width: 200px; height: 35px; margin-left: 65px;">
         <ul class="menu">
           <li>
-            <a href="index.html">Home</a>
+            <a href="index.php">Home</a>
           </li>
-          <li><a href="rooms.html" class="active">Rooms</a></li>
-          <li><a href="dining.html">Dining</a></li>
+          <li><a href="rooms.php" class="active">Rooms</a></li>
+          <li><a href="dining.php">Dining</a></li>
           <li><a href="#">Events</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
           <a class="register-button" href="register.html">Register</a>
-          <a class="login-button" href="log-in.html">Log in</a>
+          <a class="login-button" href="log-in.php">Log in</a>
         </ul>
         <a class="book-button" href="#">BOOK NOW</a>
       </nav>
