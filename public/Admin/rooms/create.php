@@ -1,5 +1,5 @@
 <?php
-require_once "../../config/DatabaseConnection.php"; 
+require_once "../../../config/DatabaseConnection.php"; 
 
 $message = "";
 
@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $price = trim($_POST["price"]);
 
     if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
-        $target_dir = "../../public/images/"; 
+        $target_dir = "../../../public/images/"; 
         $file_name = time() . "_" . basename($_FILES["image"]["name"]);
         $target_file = $target_dir . $file_name;
         $file_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -128,27 +128,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         font-size: 16px;
         margin-top: 15px;
     }
+    
+    .back-button {
+        background-color: #064420; /* Dark green */
+        color: white;
+        padding: 10px 15px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 15px;
+        transition: background 0.3s ease-in-out;
+    }
+
+    .back-button:hover {
+        background-color: #04351a;
+    }
     </style>
 </head>
 <body>
     <h2>Shto një dhomë të re</h2>
     <form action="create.php" method="post" enctype="multipart/form-data">
-        <label>Emri i dhomës:</label>
+    <label>Room Name:</label>
         <input type="text" name="name" required><br>
 
-        <label>Çmimi (€):</label>
+        <label>Price (€):</label>
         <input type="number" step="0.01" name="price" required><br>
 
-        <label>Përshkrimi:</label>
+        <label>Description:</label>
         <textarea name="description" required></textarea><br>
 
-        <label>Fotografia:</label>
+        <label>Image:</label>
         <input type="file" name="image" required><br>
+        <button type="submit">Add Room</button>
+        </form>
+        <a href="../dashboard.php" class="back-button">← Back to Dashboard</a>
 
-        <button type="submit">Shto Dhomën</button>
-    </form>
-
-    <p class="<?php echo ($message == "Dhoma u shtua me sukses!") ? 'success-message' : ''; ?>">
+   
+        <p class="<?php echo ($message == "Room added successfully!") ? 'success-message' : ''; ?>">
         <?php echo $message; ?>
     </p>
 </body>

@@ -66,11 +66,11 @@
         <?php
             $menu_items = [
                 ["Dashboard", "dashboard.php"],
-                ["Users", "users.php"],
-                ["Reservations", "reservations.php"],
+                ["Users", "users/admin_users.php"],
+                ["Reservations", "reservations/reservation.php"],
                 ["Messages", "messages.php"],
                 ["Settings", "settings.php"],
-                ["Rooms", "roomsAdmin.php"] 
+                ["Rooms", "rooms/roomsAdmin.php"] 
             ];            
             foreach ($menu_items as $item) {
                 echo "<a href='" . $item[1] . "'>" . $item[0] . "</a>";
@@ -80,7 +80,7 @@
     </div>
     <div class="content">
         <h1>Welcome to Admin Dashboard</h1>
-        <a href="create.php">
+        <a href="rooms/create.php">
             <button>Create a New Room</button>
         </a>
     </div>
