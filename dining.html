@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,6 +10,7 @@
     <div id="main">
       <!-- Navigation Bar -->
       <nav class="navbar">
+        <img src="images/logo.png" alt="logo" style="width: 200px; height: 35px; margin-left: 65px;">
         <ul class="menu">
           <li><a href="index.html">Home</a></li>
           <li><a href="rooms.html">Rooms</a></li>
@@ -16,40 +18,42 @@
           <li><a href="#">Events</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
+          <a class="register-button" href="register.html">Register</a>
+          <a class="login-button" href="log-in.html">Log in</a>
         </ul>
         <a class="book-button" href="#">BOOK NOW</a>
       </nav>
 
-      <!-- Dining Banner Section -->
-      <div id="banner">
-        <div class="myContainer">
-          <div class="row relative">
-            <img src="./images/dining-banner.jpg" alt="Dining Image" class="img-responsive" />
-            <div class="bannerBox">
-              <h2>Dining at Our Resort</h2>
-              <p>
-                Experience culinary excellence and indulge in a variety of dining options. Whether you're enjoying a gourmet meal or a casual bite, our dining options offer something for every palate.
-              </p>
-            </div>
-          </div>
+      <!-- Dining Section -->
+      <div class="container">
+        <img src="images/dining-1.jpg" alt="Dining" id="part1" width="350px" height="550px">
+        <div class="text1">
+          <h1>Dine with us</h1><br><br>
+          <p>Indulge in a variety of dining options at our resort, whether you're seeking a gourmet experience, casual bites, or a relaxing beachside meal.</p><br><br>
+          <p>Our restaurants offer fresh, locally sourced ingredients and a wide selection of international and Albanian-inspired dishes. Join us for unforgettable meals and spectacular views.</p>
+          <br><br>
+          <button>BOOK A TABLE</button>
         </div>
+        <img src="images/dining-2.jpg" alt="dining-2" id="part2" width="350px" height="550px">
       </div>
 
-      <!-- Dining Options -->
+      <hr>
+
+      <!-- Dining Options Section -->
       <div id="diningOptions">
         <div class="myContainer">
           <div class="row">
             <div class="half">
-              <img src="./images/restaurant1.jpg" alt="Restaurant Image" class="img-responsive" />
+              <img src="images/restaurant.jpg" alt="Restaurant" class="img-responsive" />
             </div>
             <div class="half">
               <div class="text-center diningText">
                 <h5>Gourmet Dining Experience</h5>
                 <p>
-                  Indulge in a fine dining experience with our expertly crafted dishes, served with the finest ingredients and presented beautifully.
+                  Savor exquisite dishes crafted from the finest ingredients. Our gourmet dining experience is perfect for those seeking a memorable culinary adventure.
                 </p>
                 <div class="customMargin">
-                  <a href="" class="roomButton">Discover More</a>
+                  <a href="#" class="roomButton">Discover More</a>
                 </div>
               </div>
             </div>
@@ -57,7 +61,7 @@
         </div>
       </div>
 
-      <!-- Outdoor Dining Area -->
+      <!-- Outdoor Dining Area Section -->
       <div id="outdoorDining">
         <div class="myContainer">
           <div class="row">
@@ -65,32 +69,54 @@
               <div class="text-center outdoorText">
                 <h5>Outdoor Dining</h5>
                 <p>
-                  Enjoy al fresco dining with a view! Dine under the stars and take in the serene surroundings of our lush gardens.
+                  Enjoy outdoor dining with spectacular views of our lush gardens. Perfect for a romantic evening or a relaxed meal under the stars.
                 </p>
                 <div class="customMargin">
-                  <a href="" class="roomButton">Discover More</a>
+                  <a href="#" class="roomButton">Discover More</a>
                 </div>
               </div>
             </div>
             <div class="half">
-              <img src="./images/outdoor-dining.jpg" alt="Outdoor Dining Image" class="img-responsive" />
+              <img src="images/outdoor.jpg" alt="Outdoor Dining" class="img-responsive" />
             </div>
           </div>
         </div>
       </div>
 
       <!-- Footer Section -->
-      <footer id="myFooter">
-        <div class="myContainer">
-          <div class="flexItems">
-            <h5>FOLLOW US:</h5>
-            <ul class="social">
-              <li><a href="#" target="_blank"><img src="./images/instagram.png" alt="instagram" /></a></li>
-              <li><a href="#" target="_blank"><img src="./images/facebook.png" alt="facebook" /></a></li>
-              <li><a href="#" target="_blank"><img src="./images/location.png" alt="location" /></a></li>
-            </ul>
+      <footer class="footer">
+        <div class="container">
+          <div class="part1">
+            <p>Connecting you to unforgettable stays and experiences</p>
+            <img src="images/logo.png" alt="logo" style="width: 200px; height: 35px; ">
+            <p>Stay in the loop with everything you need to know.</p>
+            <input class="email" id="email" name="email" placeholder="Enter your Email">
+            <button class="submit" id="submit">Submit</button>
+          </div>
+          <div class="part2">
+            <h2>Links</h2>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rooms.html">Rooms</a></li>
+            <li><a href="#">Dining</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </div>
+          <div class="part3">
+            <h2>Social</h2>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Youtube</a></li>
+          </div>
+          <div class="part4">
+            <h2>Contact Us</h2>
+            <li>+91 5695 225 255</li>
+            <li><a href="#">hotelname@gmail.com</a></li>
+            <li>Epidamn, Dhërmi Beachfront, 9422, Albania</li>
           </div>
         </div>
+        <p class="rights-reserved">| © 2024 Velvære | All rights reserved |</p>
+        <p><a href="login"></a>Administrator Login</p>
       </footer>
     </div>
   </body>
