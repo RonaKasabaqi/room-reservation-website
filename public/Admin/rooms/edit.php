@@ -1,5 +1,5 @@
 <?php
-require_once "../../config/DatabaseConnection.php";
+require_once "../../../config/DatabaseConnection.php";
 
 $message = "";
 if (isset($_GET['id'])) {
@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
         $image = $room['image']; 
 
         if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
-            $target_dir = "../../public/images/";
+            $target_dir = "../../../public/images/";
             $file_name = basename($_FILES["image"]["name"]);
             $target_file = $target_dir . $file_name;
             $file_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -143,31 +143,31 @@ if (isset($_GET['id'])) {
     </style>
 </head>
 <body>
-    <h2>Përditëso të dhënat e dhomës</h2>
+    <h2>Update Room Information</h2>
     
     <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-        <p style="color: green;">Dhoma u përditësua me sukses!</p>
+        <p style="color: green;">Room updated successfully!</p>
     <?php endif; ?>
     
     <form action="edit.php?id=<?php echo $id; ?>" method="post" enctype="multipart/form-data">
-        <label>Emri i dhomës:</label>
+    <label>Room Name:</label>
         <input type="text" name="name" value="<?php echo htmlspecialchars($room['name']); ?>" required><br>
 
-        <label>Çmimi (€):</label>
+        <label>Price (€):</label>
         <input type="number" step="0.01" name="price" value="<?php echo htmlspecialchars($room['price']); ?>" required><br>
 
-        <label>Përshkrimi:</label>
+        <label>Description:</label>
         <textarea name="description" required><?php echo htmlspecialchars($room['description']); ?></textarea><br>
 
-        <label>Fotografia:</label>
+        <label>Image:</label>
         <input type="file" name="image"><br>
-        <img src="../../<?php echo $room['image']; ?>" width="100px"><br>
+        <img src="../../../<?php echo $room['image']; ?>" width="100px"><br>
 
-        <button type="submit">Përditëso Dhomen</button>
+        <button type="submit">Update Room</button>
     </form>
 
     <a href="roomsAdmin.php">
-        <button type="button" class="small-button">Kthehu Pas</button>
+        <button type="button" class="small-button">Go Back</button>
     </a>
 
     <p><?php echo $message; ?></p>

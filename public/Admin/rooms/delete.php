@@ -1,5 +1,5 @@
 <?php
-require_once "../../config/DatabaseConnection.php";
+require_once "../../../config/DatabaseConnection.php";
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
