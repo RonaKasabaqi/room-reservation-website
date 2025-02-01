@@ -4,6 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Room Reservation Page</title>
     <link rel="stylesheet" href="./style.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+  />
   </head>
 
   <body>
@@ -12,15 +16,15 @@
         <img src="images/logo.png" alt="" style="width: 200px; height: 35px; margin-left: 65px;">
         <ul class="menu">
           <li>
-            <a href="index.html">Home</a>
+            <a href="index.php">Home</a>
           </li>
-          <li><a href="rooms.html" class="active">Rooms</a></li>
-          <li><a href="dining.html">Dining</a></li>
+          <li><a href="rooms.php" class="active">Rooms</a></li>
+          <li><a href="dining.php">Dining</a></li>
           <li><a href="#">Events</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
           <a class="register-button" href="register.html">Register</a>
-          <a class="login-button" href="log-in.html">Log in</a>
+          <a class="login-button" href="log-in.php">Log in</a>
         </ul>
         <a class="book-button" href="#">BOOK NOW</a>
       </nav>
@@ -177,6 +181,7 @@
       <div id="book">
         <div class="myContainer">
           <div class="row relative">
+            <div class="book-section">
             <img
               src="./images/bookImage.png"
               alt="Book Your Escape"
@@ -196,6 +201,35 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="slider-wrapper">
+      <div class="swiper slider-container">
+          <div class="swiper-wrapper">
+              <?php
+              $slides = [
+                  ["img" => "./images/18-1.jpg", "title" => "Welcome to Paradise", "description" => "Discover luxury and beauty."],
+                  ["img" => "./images/7-1.jpg", "title" => "Relax in Comfort", "description" => "Experience elegance and tranquility."],
+                  ["img" => "./images/9-1.jpg", "title" => "Breathtaking Views", "description" => "Immerse yourself in nature."]
+              ];
+              
+              foreach ($slides as $slide) {
+                  echo '<div class="swiper-slide">';
+                  echo '<img src="' . $slide["img"] . '" alt="' . $slide["title"] . '" />';
+                  echo '<div class="slide-content">';
+                  echo '<h3>' . $slide["title"] . '</h3>';
+                  echo '<p>' . $slide["description"] . '</p>';
+                  echo '</div>';
+                  echo '</div>';
+              }
+              ?>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+      </div>
+  </div>
+  
       <footer id="myFooter">
         <div class="myContainer">
           <div class="flexItems">
@@ -220,7 +254,50 @@
           </div>
         </div>
       </footer>
-    </div>
+      <style>
+        .book-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+    
+        .slider-wrapper {
+            max-width: 60%;
+            margin: 30px auto;
+        }
+        
+        .swiper-container {
+            width: 50%;
+            height: 100px;
+        }
+        
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    </style>
+    
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.slider-container', {
+            loop: true,
+            autoplay: {
+                delay: 3000,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+    
     <script>
       const roomData = [
         {
