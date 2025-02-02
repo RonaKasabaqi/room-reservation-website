@@ -1,3 +1,11 @@
+<?php  
+include('C:\xampp\htdocs\WebProveE\config\DatabaseConnection.php');
+$sql = "SELECT * FROM content";
+$result = mysqli_query($conn, $sql);
+if (!$result) {
+    die("Error: " . mysqli_error($conn));
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,6 +66,38 @@
         button:active {
             background-color: #148567;
         }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color:rgb(9, 133, 117);
+            color:white;
+        }
+        .actions button {
+            padding: 6px 12px; /* Smaller buttons */
+            font-size: 14px;   /* Smaller text */
+            margin-right: 8px; /* Space between buttons */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom:5px;
+        }
+        .actions .update {
+            background-color:rgb(9, 133, 117);/* Green background for update */
+        }
+        .actions .delete {
+            background-color:rgb(226, 9, 9);/* Red background for delete */
+        }
+        .actions a {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -70,7 +110,8 @@
                 ["Reservations", "reservations/reservation.php"],
                 ["Messages", "messages.php"],
                 ["Settings", "settings.php"],
-                ["Rooms", "rooms/roomsAdmin.php"] 
+                ["Rooms", "rooms/roomsAdmin.php"],
+                ["Services", "services/servicesAdmin.php"]
             ];            
             foreach ($menu_items as $item) {
                 echo "<a href='" . $item[1] . "'>" . $item[0] . "</a>";
@@ -83,6 +124,39 @@
         <a href="rooms/create.php">
             <button>Create a New Room</button>
         </a>
+        <a href="content/createContent.php">
+            <button>Create a New Content</button>
+        </a>
+        <h2>Content from Admin</h2>
+        
+        <table>
+            <tr>
+                <th>Content ID</th>
+                <th>Text Content</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+                <th>Actions</th>
+            </tr>
+            <?php
+            // Shfaq të dhënat nga databaza
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                echo "<td>" . $row['id'] . "</td>";
+                echo "<td>" . nl2br($row['text_content']) . "</td>";
+                echo "<td>" . $row['created_at'] . "</td>";
+                echo "<td>" . $row['updated_at'] . "</td>";
+                echo "<td class='actions'>
+                        <a href='content/updateContent.php?id=" . $row['id'] . "'><button class='update'>Update</button></a>
+                        <a href='content/deleteContent.php?id=" . $row['id'] . "'><button class='delete'>Delete</button></a>
+                    </td>";
+                echo "</tr>";
+            }
+            ?>
+        </table>
     </div>
 </body>
 </html>
+<?php
+// Mbyll lidhjen me databazën
+mysqli_close($conn);
+?>

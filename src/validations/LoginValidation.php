@@ -1,6 +1,6 @@
 <?php
-require_once 'C:\xampp\htdocs\room-reservation-website\src\controllers\LoginController.php';
-require_once 'C:\xampp\htdocs\room-reservation-website\config\DatabaseConnection.php';
+require_once 'C:\xampp\htdocs\room-reservation-website-1\src\controllers\LoginController.php';
+require_once 'C:\xampp\htdocs\room-reservation-website-1\config\DatabaseConnection.php';
 
 $error = ""; 
 

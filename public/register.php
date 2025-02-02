@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\xampp\htdocs\room-reservation-website\src\validations\RegisterValidation.php';
+require_once 'C:\xampp\htdocs\room-reservation-website-1\src\validations\RegisterValidation.php';
 ?>
 
 <!DOCTYPE html>

@@ -1,4 +1,4 @@
-<?php require_once 'C:\xampp\htdocs\room-reservation-website\src\validations\LoginValidation.php'; ?>
+<?php require_once 'C:\xampp\htdocs\room-reservation-website-1\src\validations\LoginValidation.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -132,7 +132,7 @@
                 <li><a href="#">Contact</a></li>
                 <a class="login-button" href="log-in.php">Log in</a>
             </ul>
-            <a class="book-button" href="#">BOOK NOW</a>
+            <a class="book-button" href="booking.php">BOOK NOW</a>
         </nav>
     </div>
     <div class="form-container">

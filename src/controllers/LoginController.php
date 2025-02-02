@@ -1,5 +1,5 @@
 <?php
-require 'C:\xampp\htdocs\room-reservation-website\config\DatabaseConnection.php';
+require 'C:\xampp\htdocs\room-reservation-website-1\config\DatabaseConnection.php';
 
 function login($conn, $email, $password) {
     $sql = "SELECT * FROM users WHERE email = ?";
