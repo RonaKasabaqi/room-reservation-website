@@ -1,17 +1,25 @@
-<?php  
-include('C:\xampp\htdocs\WebProveE\config\DatabaseConnection.php');
+<?php
+session_start();
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
+    header("Location: ../log-in.php");
+    exit();
+}
+include('C:\xampp\htdocs\room-reservation-website-1\config\DatabaseConnection.php');
+
 $sql = "SELECT * FROM content";
 $result = mysqli_query($conn, $sql);
+
 if (!$result) {
     die("Error: " . mysqli_error($conn));
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Sidebar</title>
+    <title>Admin Dashboard</title>
     <style>
         body {
             margin: 0;
@@ -61,9 +69,6 @@ if (!$result) {
             transition: background-color 0.3s;
         }
         button:hover {
-            background-color: #0d322d;
-        }
-        button:active {
             background-color: #148567;
         }
         table {
@@ -83,17 +88,17 @@ if (!$result) {
             color:white;
         }
         .actions button {
-            padding: 6px 12px; /* Smaller buttons */
-            font-size: 14px;   /* Smaller text */
-            margin-right: 8px; /* Space between buttons */
-            border-radius: 4px; /* Rounded corners */
+            padding: 6px 12px; 
+            font-size: 14px;   
+            margin-right: 8px; 
+            border-radius: 4px; 
             margin-bottom:5px;
         }
         .actions .update {
-            background-color:rgb(9, 133, 117);/* Green background for update */
+            background-color:rgb(9, 133, 117);
         }
         .actions .delete {
-            background-color:rgb(226, 9, 9);/* Red background for delete */
+            background-color:rgb(226, 9, 9);
         }
         .actions a {
             text-decoration: none;
@@ -117,8 +122,10 @@ if (!$result) {
                 echo "<a href='" . $item[1] . "'>" . $item[0] . "</a>";
             }
         ?>
-        <a href="logout.php" style="margin-top: auto; background-color:rgb(231, 41, 20);">Logout</a>
+        <a href="../log-out.php" style="margin-top: auto; background-color:rgb(231, 41, 20);">Logout</a>
+
     </div>
+
     <div class="content">
         <h1>Welcome to Admin Dashboard</h1>
         <a href="rooms/create.php">
@@ -138,7 +145,6 @@ if (!$result) {
                 <th>Actions</th>
             </tr>
             <?php
-            // Shfaq të dhënat nga databaza
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<tr>";
                 echo "<td>" . $row['id'] . "</td>";
@@ -154,9 +160,10 @@ if (!$result) {
             ?>
         </table>
     </div>
+
 </body>
 </html>
+
 <?php
-// Mbyll lidhjen me databazën
 mysqli_close($conn);
 ?>
