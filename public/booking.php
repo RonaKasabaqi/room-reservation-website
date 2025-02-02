@@ -1,5 +1,10 @@
 <?php  
-include 'C:\xampp\htdocs\room-reservation-website-1\config\DatabaseConnection.php';
+include("../config/DatabaseConnection.php");
+session_start();
+if (!isset($_SESSION["email"])) {
+    echo "Ju nuk jeni i identifikuar. Ju lutemi <a href='log-in.php'>kyçuni këtu</a> për të vazhduar.";
+    exit(); 
+}
 $sqlRooms = "SELECT id, name FROM rooms";
 $resultRooms = mysqli_query($conn, $sqlRooms);
 

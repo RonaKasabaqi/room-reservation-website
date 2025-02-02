@@ -9,12 +9,16 @@ $perdoruesi = htmlspecialchars($_SESSION["fullname"] ?? $_SESSION["email"]);
 echo "<script>
     alert('Mirë se vini, $perdoruesi!');
 </script>";
+
+include('../config/DatabaseConnection.php');
+
 $sql = "SELECT * FROM content";
 $result = mysqli_query($conn, $sql);
 
 if (!$result) {
     die("Error: " . mysqli_error($conn));
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,17 +33,18 @@ if (!$result) {
     <title>Document</title>
 </head>
 <body>
-    <div id="main">
+<div id="main">
         <nav class="navbar">
             <img src="images/logo.png" alt="logo" style="width: 200px; height: 35px; margin-left: 65px;">
             <ul class="menu">
                 <li><a href="index.php" class="active">Home</a></li>
                 <li><a href="rooms.php">Rooms</a></li>
-                <li><a href="dining.html">Dining</a></li>
+                <li><a href="dining.php">Dining</a></li>
                 <li><a href="#">Events</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
                 <a class="login-button" href="log-in.php">Log in</a>
+                <a class="logout-button" href="log-out.php">Log out</a>
             </ul>
             <a class="book-button" href="booking.php">BOOK NOW</a>
         </nav>
@@ -68,11 +73,11 @@ if (!$result) {
             <a class="prev" onclick="changeSlide(-1)">❮</a>
             <a class="next" onclick="changeSlide(1)">❯</a>
         </div>
+        
         <div class="container">
         <img src="images/part1.jpeg" alt="part1" id="part1" width="250px" height="600px">
         <div class="text1">
             <?php
-            // Shfaq përmbajtjen nga databaza
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='content-item'>";
                 echo "<p>" . nl2br($row['text_content']) . "</p>";
@@ -131,7 +136,7 @@ while ($service = mysqli_fetch_assoc($result_services)) {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
     background: white;
     min-height: 500px;
-    margin-bottom: 30px; /* Shton hapësirë në fund të çdo karte */
+    margin-bottom: 30px; 
 }
 
 .service-image img {
@@ -170,16 +175,7 @@ while ($service = mysqli_fetch_assoc($result_services)) {
 }
 
 </style>
-        <div class="comments">
-            <div class="comment-1">
-                <h2>Hear from Our Clients</h2>
-                <p>" Our wedding reception here was beyond what we imagined! The team went above and beyond to make every detail perfect. 
-                    The decor was elegant, the service was impeccable, and the views provided a magical backdrop.
-                     Thank you for an unforgettable experience! "
-                </p>
-                <p>Emily and Daniel S., July 2024</p>
-            </div>
-        </div>
+
         <footer class="footer">
             <div class="container">
                 <div class="part1">
@@ -232,7 +228,7 @@ while ($service = mysqli_fetch_assoc($result_services)) {
     </script>
 </body>
 </html>
+
 <?php
-// Mbyll lidhjen me databazën
 mysqli_close($conn);
 ?>

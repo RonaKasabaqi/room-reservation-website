@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $error = "Password nuk mund të jetë bosh!";
     } else {
         if (login($conn, $email, $password)) {
-            header("Location: http://localhost/room-reservation-website/public/index.php");
+            header("Location: http://localhost/room-reservation-website-1/public/index.php");
             exit();
         } else {
             $error = "Incorrect email or password! Please try again or register.";

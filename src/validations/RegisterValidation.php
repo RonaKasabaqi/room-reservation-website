@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errors["password"] = "Password duhet të ketë të paktën 6 karaktere!";
         $valid = false;
     }
-
+    
     if ($valid) {
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
@@ -73,8 +73,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             "email" => $email,
             "password" => $hashedPassword 
         ];
+
         $response = Register($conn, $users);
-        header("Location: http://localhost/room-reservation-website/public/log-in.php");
+        header("Location: http://localhost/room-reservation-website-1/public/log-in.php");
         exit();
     }
 }

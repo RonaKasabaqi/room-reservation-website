@@ -1,5 +1,49 @@
 <?php
-require_once 'C:\xampp\htdocs\room-reservation-website-1\src\validations\RegisterValidation.php';
+require_once '../config/DatabaseConnection.php';
+
+$errors = [];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $fullname = trim($_POST["fullname"]);
+    $username = trim($_POST["username"]);
+    $email = trim($_POST["email"]);
+    $password = $_POST["password"];
+    $confirmpassword = $_POST["confirmpassword"];
+    $is_admin = isset($_POST["is_admin"]) ? 1 : 0; 
+
+    if (empty($fullname)) $errors['fullname'] = "Full name is required.";
+    if (empty($username)) $errors['username'] = "Username is required.";
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors['email'] = "Valid email is required.";
+    if (empty($password)) $errors['password'] = "Password is required.";
+    if ($password !== $confirmpassword) $errors['confirmpassword'] = "Passwords do not match.";
+
+    if (empty($errors)) {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $checkUser = $conn->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
+        $checkUser->bind_param("ss", $username, $email);
+        $checkUser->execute();
+        $result = $checkUser->get_result();
+
+        if ($result->num_rows > 0) {
+            $errors['username'] = "Username or email already exists.";
+        } else {
+
+            $stmt = $conn->prepare("INSERT INTO users (fullname, username, email, password, is_admin) VALUES (?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssi", $fullname, $username, $email, $hashedPassword, $is_admin);
+            
+            if ($stmt->execute()) {
+                header("Location: log-in.php?success=1");
+                exit();
+            } else {
+                $errors['general'] = "Registration failed. Try again.";
+            }
+            $stmt->close();
+        }
+
+        $checkUser->close();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -133,7 +177,7 @@ require_once 'C:\xampp\htdocs\room-reservation-website-1\src\validations\Registe
     </style>
 </head>
 <body>
-    <div id="main">
+<div id="main">
         <nav class="navbar">
             <img src="images/logo.png" alt="Logo" style="width: 200px; height: 35px; margin-left: 65px;">
             <ul class="menu">
@@ -145,35 +189,37 @@ require_once 'C:\xampp\htdocs\room-reservation-website-1\src\validations\Registe
                 <li><a href="#">Contact</a></li>
                 <a class="login-button" href="log-in.php">Log in</a>
             </ul>
-            <a class="book-button" href="#">BOOK NOW</a>
+            <a class="book-button" href="booking.php">BOOK NOW</a>
         </nav>
     </div>
     <div class="form-container">
         <form action="register.php" method="POST">
-        <h1>Register</h1>
-        <div class="form-group">
-            <input type="text" name="fullname" placeholder="Full Name" value="<?php echo isset($_POST['fullname']) ? htmlspecialchars($_POST['fullname']) : ''; ?>">
-            <span class="error"><?php echo $errors['fullname'] ?? ''; ?></span>
-        </div>
-        <div class="form-group">
-            <input type="text" name="username" placeholder="Username" value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
-            <span class="error"><?php echo $errors['username'] ?? ''; ?></span>
-        </div>
-        <div class="form-group">
-            <input type="email" name="email" placeholder="Email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
-            <span class="error"><?php echo $errors['email'] ?? ''; ?></span>
-        </div>
-        <div class="form-group">
-            <input type="password" name="password" placeholder="Password">
-            <span class="error"><?php echo $errors['password'] ?? ''; ?></span>
-        </div>
-        <div class="form-group">
-            <input type="password" name="confirmpassword" placeholder="Confirm Password">
-            <span class="error"><?php echo $errors['confirmpassword'] ?? ''; ?></span>
-        </div>
-        <button type="submit">Register</button>
+            <h1>Register</h1>
+            <span class="error"><?php echo $errors['general'] ?? ''; ?></span>
+            <div class="form-group">
+                <input type="text" name="fullname" placeholder="Full Name" value="<?php echo htmlspecialchars($_POST['fullname'] ?? ''); ?>">
+                <span class="error"><?php echo $errors['fullname'] ?? ''; ?></span>
+            </div>
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Username" value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>">
+                <span class="error"><?php echo $errors['username'] ?? ''; ?></span>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
+                <span class="error"><?php echo $errors['email'] ?? ''; ?></span>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password">
+                <span class="error"><?php echo $errors['password'] ?? ''; ?></span>
+            </div>
+            <div class="form-group">
+                <input type="password" name="confirmpassword" placeholder="Confirm Password">
+                <span class="error"><?php echo $errors['confirmpassword'] ?? ''; ?></span>
+            </div>
+            <button type="submit">Register</button>
         </form>
         <p class="login-link">Already have an account? <a href="log-in.php">Log in</a></p>
     </div>
 </body>
 </html>
+

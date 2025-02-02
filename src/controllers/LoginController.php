@@ -12,10 +12,9 @@ function login($conn, $email, $password) {
 
         if ($row = mysqli_fetch_assoc($result)) {
             if (password_verify($password, $row['password'])) {
-               
                 session_start();
                 $_SESSION["email"] = $row["email"];
-                $_SESSION["fullname"] = $row["fullname"]; 
+                $_SESSION["fullname"] = $row["fullname"];
                 return true;
             } else {
                 return false; 
