@@ -1,6 +1,11 @@
 <?php
 include("../../../config/DatabaseConnection.php");
+session_start();
 
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
+    header("Location: ../log-in.php");
+    exit();
+}
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $query = "SELECT * FROM content WHERE id = $id";
@@ -106,6 +111,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </html>
 
 <?php
-// Mbyll lidhjen me databazën
 mysqli_close($conn);
 ?>

@@ -1,6 +1,12 @@
 <?php  
 require_once "../../../config/DatabaseConnection.php"; 
+session_start();
 
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
+    
+    header("Location: ../log-in.php");
+    exit();
+}
 
 $sql = "SELECT id, image, title, description, link FROM services";
 $result = $conn->query($sql);
@@ -125,33 +131,33 @@ $result = $conn->query($sql);
         .back-button:hover {
             background-color:rgb(20, 85, 77);
         }
-        /* Updated styling for Add New Service button */
+       
 a button {
-    background-color: #0d322d;  /* Dark green color */
+    background-color: #0d322d;  
     color: white;
-    padding: 10px 20px;  /* Larger padding for a bigger button */
-    font-size: 18px;  /* Bigger text */
+    padding: 10px 20px;  
+    font-size: 18px;  
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    margin-bottom: 30px;  /* Adds more space between the button and services section */
+    margin-bottom: 30px; 
     display: inline-block;
     transition: background 0.3s ease-in-out;
 }
 
 a button:hover {
-    background-color: rgb(20, 85, 77);  /* Slightly darker green on hover */
+    background-color: rgb(20, 85, 77); 
 }
-/* Styling for View More link */
+
 .service a {
-    color: #0d322d;  /* Dark green color */
-    font-size: 14px;  /* Smaller font size */
-    text-decoration: none;  /* Remove underline */
+    color: #0d322d; 
+    font-size: 14px; 
+    text-decoration: none; 
     transition: color 0.3s ease-in-out;
 }
 
 .service a:hover {
-    color: rgb(20, 85, 77);  /* Slightly darker green on hover */
+    color: rgb(20, 85, 77); 
 }
 
     </style>

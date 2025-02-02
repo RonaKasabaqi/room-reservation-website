@@ -1,6 +1,11 @@
 <?php 
 require_once "../../../config/DatabaseConnection.php";
+session_start();
 
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
+    header("Location: ../log-in.php");
+    exit();
+}
 $message = "";
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = $_GET['id'];

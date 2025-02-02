@@ -1,33 +1,41 @@
 <?php 
-require_once "../../../config/DatabaseConnection.php";
+require_once "../../../config/DatabaseConnection.php"; 
+session_start();
 
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
+    header("Location: ../log-in.php");
+    exit();
+}
 $sql = "SELECT id, name, description, image, price FROM rooms";
 $result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
-<html lang="sq">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dhomat</title>
+    <title>Available Rooms</title>
     <style>
-         body {
+        body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(to right, #f8f9fa, #e3f2fd);
             text-align: center;
             margin: 50px;
         }
+
+        h2 {
+            color: #0d322d;
+            font-size: 26px;
+            font-weight: 600;
+        }
+
         .room-container {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
             justify-content: center;
         }
-        h2 {
-            color: #0d322d;
-            font-size: 26px;
-            font-weight: 600;
-        }
+
         .room {
             border: 1px solid #ddd;
             padding: 10px;
@@ -40,29 +48,34 @@ $result = $conn->query($sql);
             box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
             background-color: #f9f9f9;
         }
+
         .room img {
             width: 100%;
             height: 200px; 
             object-fit: cover;
             border-radius: 5px;
         }
+
         .room h3 {
             font-size: 18px;
             margin: 10px 0;
         }
+
         .room p {
-            max-height: 80px;
-            overflow: auto; 
-            text-overflow: ellipsis; 
+            max-height: 80px; 
+            overflow: auto;
+            text-overflow: ellipsis;
             word-wrap: break-word; 
             padding: 5px;
             margin: 5px 0;
         }
+
         .buttons {
             display: flex;
             gap: 10px;
             justify-content: center;
         }
+
         .buttons button {
             padding: 8px 12px;
             border: none;
@@ -72,18 +85,21 @@ $result = $conn->query($sql);
             cursor: pointer;
             transition: background 0.3s ease-in-out;
         }
-        
+
         .buttons button:hover {
-            background-color:rgb(37, 136, 123);
+            background-color: rgb(37, 136, 123);
         }
+
         .delete-button {
             background-color: #dc3545;
         }
+
         .delete-button:hover {
             background-color: #a71d2a;
         }
+
         .back-button {
-            background-color: #064420; /* Dark green */
+            background-color: #064420; 
             color: white;
             padding: 10px 15px;
             font-size: 14px;
@@ -95,15 +111,15 @@ $result = $conn->query($sql);
             margin-top: 20px;
             transition: background 0.3s ease-in-out;
         }
+
         .back-button:hover {
             background-color: #04351a;
         }
-      
-
     </style>
 </head>
 <body>
-<div class="room-container">
+    <h2>Available Rooms</h2>
+    <div class="room-container">
         <?php
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -134,3 +150,4 @@ $result = $conn->query($sql);
 <?php
 $conn->close();
 ?>
+

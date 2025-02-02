@@ -1,10 +1,50 @@
-<?php require_once 'C:\xampp\htdocs\room-reservation-website-1\src\validations\LoginValidation.php'; ?>
+<?php
+session_start();
+
+require_once '../config/DatabaseConnection.php'; 
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $query = "SELECT * FROM users WHERE email = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    
+    mysqli_stmt_bind_param($stmt, 's', $email);
+
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+    if ($user = mysqli_fetch_assoc($result)) {
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['user_id'] = $user['Id'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['is_admin'] = $user['is_admin'];
+
+            if ($user['is_admin'] == 1) {
+                header("Location: Admin/dashboard.php");
+                exit();
+            } else {
+                header("Location: index.php");
+                exit();
+            }
+        } else {
+            $error = "Email ose fjalëkalimi i gabuar!";
+        }
+    } else {
+        $error = "Email ose fjalëkalimi i gabuar!";
+    }
+
+    mysqli_stmt_close($stmt);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Form</title>
+    <title>Log in</title>
     <style>
         body {
             margin: 0;
@@ -120,7 +160,7 @@
     </style>
 </head>
 <body>
-    <div id="main">
+<div id="main">
         <nav class="navbar">
             <img src="images/logo.png" alt="" style="width: 200px; height: 35px; margin-left: 65px;">
             <ul class="menu">
@@ -138,14 +178,13 @@
     <div class="form-container">
         <form method="POST" action="">
             <h1>Log in</h1>
-            <?php if (!empty($error)): ?>
-                <div class="error"> <?= htmlspecialchars($error) ?> </div>
+            <?php if (isset($error)): ?>
+                <div class="error"><?= htmlspecialchars($error) ?></div>
             <?php endif; ?>
             <input type="text" name="email" id="email" placeholder="Email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
             <input type="password" name="password" id="password" placeholder="Password">
             <button type="submit">Log in</button>
         </form>
-        <p>Need admin access? <a href="admin-login.html">Log in as Admin</a></p>
         <p class="register-link">Don't have an account? <a href="register.php">Sign up</a></p>
     </div>
 </body>

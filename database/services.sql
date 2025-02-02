@@ -1,0 +1,8 @@
+CREATE TABLE services (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    image VARCHAR(255) NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,  
+    link VARCHAR(255) NOT NULL
+);
+

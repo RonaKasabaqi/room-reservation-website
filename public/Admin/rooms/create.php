@@ -1,6 +1,11 @@
 <?php
-require_once "../../../config/DatabaseConnection.php"; 
+require_once "../../../config/DatabaseConnection.php";
+session_start();
 
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
+    header("Location: ../log-in.php");
+    exit();
+}
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -9,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $price = trim($_POST["price"]);
 
     if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
-        $target_dir = "../../../public/images/"; 
+        $target_dir = "../../../public/images/";
         $file_name = time() . "_" . basename($_FILES["image"]["name"]);
         $target_file = $target_dir . $file_name;
         $file_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -17,37 +22,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (in_array($file_type, $allowed_types)) {
             if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-
                 $image_path = "public/images/" . $file_name;
 
                 if ($conn->connect_error) {
-                    die("Gabim në lidhje me databazën: " . $conn->connect_error);
+                    die("Database connection error: " . $conn->connect_error);
                 }
 
                 $sql = "INSERT INTO rooms (name, description, image, price) VALUES (?, ?, ?, ?)";
                 $stmt = $conn->prepare($sql);
 
                 if (!$stmt) {
-                    die("Gabim në SQL: " . $conn->error);
+                    die("SQL error: " . $conn->error);
                 }
-
                 $stmt->bind_param("sssd", $name, $description, $image_path, $price);
 
                 if ($stmt->execute()) {
-                    $message = "Dhoma u shtua me sukses!";
+                    $message = "Room added successfully!";
                 } else {
-                    $message = "Gabim gjatë shtimit të dhomës.";
+                    $message = "Error adding room.";
                 }
-
                 $stmt->close();
             } else {
-                $message = "Gabim gjatë lëvizjes së skedarit.";
+                $message = "Error uploading file.";
             }
         } else {
-            $message = "Formati i skedarit nuk lejohet!";
+            $message = "Invalid file format!";
         }
     } else {
-        $message = "Ju lutemi ngarkoni një fotografi!";
+        $message = "Please upload an image!";
     }
 }
 ?>
@@ -57,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shto Dhomë</title>
+    <title>Add New Room</title>
     <style>
     body {
         font-family: 'Poppins', sans-serif;
@@ -65,12 +67,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         text-align: center;
         margin: 50px;
     }
+
     h2 {
         color: #0d322d;
         font-size: 26px;
         margin-bottom: 20px;
         font-weight: 600;
     }
+
     form {
         background: white;
         max-width: 420px;
@@ -81,10 +85,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         transition: all 0.3s ease-in-out;
         border: 1px solid rgb(8, 106, 93);
     }
+
     form:hover {
         box-shadow: 0 8px 20px rgba(8, 106, 93, 0.4);
         transform: scale(1.02);
     }
+
     label {
         display: block;
         margin-top: 15px;
@@ -92,6 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         color: #0d322d;
         font-size: 15px;
     }
+
     input, textarea {
         width: calc(100% - 20px);
         padding: 12px;
@@ -101,11 +108,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         font-size: 16px;
         transition: border 0.3s ease-in-out;
     }
+
     input:focus, textarea:focus {
         border-color: rgb(8, 106, 93);
         outline: none;
         box-shadow: 0 0 8px rgba(8, 106, 93, 0.5);
     }
+
     button {
         background: linear-gradient(135deg, rgb(8, 106, 93), #0d322d);
         color: white;
@@ -118,17 +127,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         width: 100%;
         transition: background 0.3s ease-in-out, transform 0.2s ease;
     }
+
     button:hover {
         background: linear-gradient(135deg, #0d322d, rgb(8, 106, 93));
         transform: scale(1.05);
     }
-    .success-message {
-        color: red;
-        font-weight: bold;
-        font-size: 16px;
-        margin-top: 15px;
-    }
-    
+
     .back-button {
         background-color: #064420; /* Dark green */
         color: white;
@@ -146,12 +150,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     .back-button:hover {
         background-color: #04351a;
     }
+
+    .success-message {
+        color: green;
+        font-weight: bold;
+        font-size: 16px;
+        margin-top: 15px;
+    }
     </style>
 </head>
 <body>
-    <h2>Shto një dhomë të re</h2>
+    <h2>Add a New Room</h2>
     <form action="create.php" method="post" enctype="multipart/form-data">
-    <label>Room Name:</label>
+        <label>Room Name:</label>
         <input type="text" name="name" required><br>
 
         <label>Price (€):</label>
@@ -162,13 +173,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <label>Image:</label>
         <input type="file" name="image" required><br>
-        <button type="submit">Add Room</button>
-        </form>
-        <a href="../dashboard.php" class="back-button">← Back to Dashboard</a>
 
-   
-        <p class="<?php echo ($message == "Room added successfully!") ? 'success-message' : ''; ?>">
+        <button type="submit">Add Room</button>
+    </form>
+
+    <a href="../dashboard.php" class="back-button">← Back to Dashboard</a>
+
+    <p class="<?php echo ($message == "Room added successfully!") ? 'success-message' : ''; ?>">
         <?php echo $message; ?>
     </p>
 </body>
 </html>
+

@@ -1,6 +1,11 @@
 <?php
 require_once "../../../config/DatabaseConnection.php";
+session_start();
 
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
+    header("Location: ../log-in.php");
+    exit();
+}
 $sql = "SELECT * FROM reservations";
 $result = mysqli_query($conn, $sql);
 

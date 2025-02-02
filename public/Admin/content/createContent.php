@@ -1,18 +1,21 @@
 <?php 
 include("../../../config/DatabaseConnection.php");
+session_start();
 
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
+    header("Location: ../log-in.php");
+    exit();
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Marrim të dhënat nga formulari
     $text_content = $_POST['text_content'];
 
-    // Krijojmë një query për të shtuar të dhënat në bazën e të dhënave
     $query = "INSERT INTO content (text_content, created_at) VALUES (?, NOW())";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $text_content); // Parametri 's' për t'iu përshtatur llojit të të dhënave (string)
+    $stmt->bind_param("s", $text_content);
 
     if ($stmt->execute()) {
         echo "Content created successfully!";
-        header('Location: ../dashboard.php'); // Redirekto në faqen kryesore pas shtimit
+        header('Location: ../dashboard.php'); 
         exit();
     } else {
         echo "Error creating content.";
@@ -105,6 +108,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </html>
 
 <?php
-// Mbyll lidhjen me databazën
 mysqli_close($conn);
 ?>

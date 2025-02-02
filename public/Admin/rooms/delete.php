@@ -10,7 +10,6 @@ if (isset($_GET['id'])) {
     if (!$stmt) {
         die("Gabim në SQL: " . $conn->error);
     }
-
     $stmt->bind_param("i", $id);
 
     if ($stmt->execute()) {
@@ -20,8 +19,6 @@ if (isset($_GET['id'])) {
     } else {
         echo "Gabim gjatë fshirjes së dhomës.";
     }
-
     $stmt->close();
 }
 ?>
-

@@ -1,6 +1,13 @@
-<?php
+<?php 
 require_once "../../../config/DatabaseConnection.php";
+session_start();
 
+// Kontrollo nëse përdoruesi është kyçur si admin
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
+    // Përdoruesi nuk është i kyçur si admin, ridrejto te login.php
+    header("Location: ../log-in.php");
+    exit();
+}
 $message = "";
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -16,7 +23,7 @@ if (isset($_GET['id'])) {
         $name = trim($_POST["name"]);
         $description = trim($_POST["description"]);
         $price = trim($_POST["price"]);
-        $image = $room['image']; 
+        $image = $room['image'];  
 
         if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
             $target_dir = "../../../public/images/";
@@ -31,7 +38,6 @@ if (isset($_GET['id'])) {
                 }
             }
         }
-
         $sql = "UPDATE rooms SET name = ?, description = ?, image = ?, price = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sssdi", $name, $description, $image, $price, $id);
@@ -40,20 +46,20 @@ if (isset($_GET['id'])) {
             header("Location: edit.php?id=$id&success=1");
             exit();
         } else {
-            $message = "Gabim gjatë përditësimit të dhomës.";
+            $message = "Error updating the room.";
         }
     }
 } else {
-    echo "ID-ja e dhomës nuk është e vlefshme.";
+    echo "Invalid room ID.";
 }
 
 ?>
 
 <!DOCTYPE html>
-<html lang="sq">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Përditëso Dhomën</title>
+    <title>Update Room</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -150,7 +156,7 @@ if (isset($_GET['id'])) {
     <?php endif; ?>
     
     <form action="edit.php?id=<?php echo $id; ?>" method="post" enctype="multipart/form-data">
-    <label>Room Name:</label>
+        <label>Room Name:</label>
         <input type="text" name="name" value="<?php echo htmlspecialchars($room['name']); ?>" required><br>
 
         <label>Price (€):</label>
@@ -173,3 +179,4 @@ if (isset($_GET['id'])) {
     <p><?php echo $message; ?></p>
 </body>
 </html>
+
