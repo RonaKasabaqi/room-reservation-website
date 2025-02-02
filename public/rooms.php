@@ -1,3 +1,9 @@
+<?php 
+require_once "../config/DatabaseConnection.php";
+$sql = "SELECT * FROM rooms";
+$result = $conn->query($sql);
+?>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -19,14 +25,13 @@
             <a href="index.php">Home</a>
           </li>
           <li><a href="rooms.php" class="active">Rooms</a></li>
-          <li><a href="dining.php">Dining</a></li>
+          <li><a href="dining.html">Dining</a></li>
           <li><a href="#">Events</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
-          <a class="register-button" href="register.html">Register</a>
           <a class="login-button" href="log-in.php">Log in</a>
         </ul>
-        <a class="book-button" href="#">BOOK NOW</a>
+        <a class="book-button" href="booking.php">BOOK NOW</a>
       </nav>
       <div id="banner">
         <div class="myContainer">
@@ -61,123 +66,35 @@
           </div>
         </div>
       </div>
-
-      <div id="underNavbar">
-        <div class="myContainer">
-          <div class="row relative">
-            <div class="imageContainer">
-              <img
-                src="./images/Rectangle 3.png"
-                alt="Photo"
-                class="myimg-responsive"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="elegant">
-        <div class="myContainer">
-          <div class="row">
-            <div class="text-center elegant_text">
-              <h5>Elegant Deluxe Double Room</h5>
-              <p>
-                Indulge in luxury and comfort in our spacious Deluxe Double
-                Room, featuring a blend of rustic charm and refined elegance.
-                Thoughtfully designed to create a cozy ambiance, this room is
-                the perfect retreat to relax and soak in the serene beauty of
-                your surroundings.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="text-center customMargin">
-        <a href="" class="roomButton">Discover more</a>
-      </div>
-      <div id="juniorSuite">
-        <div class="myContainer">
-          <div class="row">
-            <div class="half">
-              <img
-                src="./images/juniorImg.png"
-                alt="Junior Suite Image"
-                class="img-responsive"
-              />
-            </div>
-            <div class="half">
-              <div class="text-center juniorText">
-                <h5>Junior Suite</h5>
-                <p>
-                  Bring your loved ones and create unforgettable memories in our
-                  inviting Junior Suite. Looking for a peaceful moment alone?
-                  Step onto your private balcony, take in the charming view of
-                  our village below, and breathe in pure relaxation.
-                </p>
-                <div class="customMargin">
-                  <a href="" class="roomButton">Discover more</a>
+      <div id="rooms-section">
+            <div class="myContainer">
+                <div class="row">
+                    <?php
+                    if ($result && $result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<div class="room-card">';
+                            echo '<div class="room-image">';
+                            echo '<img src="../' . htmlspecialchars($row["image"]) . '" alt="' . htmlspecialchars($row["name"]) . '" class="img-responsive" />';
+                            echo '</div>';
+                            echo '<div class="room-content">';
+                            echo '<h5>' . htmlspecialchars($row["name"]) . '</h5>';
+                            echo '<p>' . htmlspecialchars($row["description"]) . '</p>';
+                            echo '<p><strong>Price:</strong> €' . htmlspecialchars($row["price"]) . ' / night</p>';
+                            echo '<div class="customMargin">';
+                            echo '<a href="#" class="roomButton">Discover more</a>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo "<p>No rooms available.</p>";
+                    }
+                    ?>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div id="seaView">
-        <div class="myContainer">
-          <div class="row">
-            <div class="half">
-              <div class="text-center seaText">
-                <h5>Coastal Haven with Sea View</h5>
-                <p>
-                  Awaken to the breathtaking views of the Ionian Sea in our
-                  Coastal Haven. This suite features lofty ceilings, polished
-                  hardwood floors, and a vibrant color palette inspired by the
-                  local landscape, with warm tones of persimmon and white.
-                  Designed for comfort and relaxation, it offers generous space
-                  and a chic atmosphere that captures the essence of an upscale
-                  beachside retreat, making it the perfect getaway.
-                </p>
-                <div class="customMargin">
-                  <a href="" class="roomButton">Discover more</a>
-                </div>
-              </div>
-            </div>
-            <div class="half">
-              <img
-                src="./images/seaViewImg.png"
-                alt="Junior Suite Image"
-                class="img-responsive"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="grandeSuite">
-        <div class="myContainer">
-          <div class="row">
-            <img
-              src="./images/grandeSuiteImage.png"
-              alt="Grande Suite Image"
-              class="img-responsive"
-            />
-            <br />
 
-            <div class="textGrande text-center">
-              <h5>Grande Suite</h5>
-              <p>
-                Our Grande Suite is thoughtfully designed to reflect the
-                stunning natural beauty of the surrounding landscape. With its
-                warm wood tones, natural stone accents, and charming exposed
-                ceiling beams, this suite offers a cozy and inviting atmosphere.
-                It’s the perfect sanctuary for relaxation and enjoyment,
-                blending comfort with elegant design.
-              </p>
-              <div class="customMargin">
-                <a href="" class="roomButton">Discover more</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
       <div id="book">
         <div class="myContainer">
           <div class="row relative">
@@ -195,7 +112,7 @@
                 wait—reserve your unforgettable stay today!
               </p>
               <div class="customMargin">
-                <a href="" class="roomButton">Book now</a>
+                <a href="booking.php" class="roomButton">Book now</a>
               </div>
             </div>
           </div>
@@ -255,29 +172,103 @@
         </div>
       </footer>
       <style>
-        .book-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
+        #rooms-section .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; 
+    gap: 20px;
+    align-items: stretch; 
+}
+
+.room-card {
+    flex-basis: 48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    background: white;
+    min-height: 500px;
+}
+
+.room-image img {
+    width: 100%;
+    height: 250px; 
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
+.room-content {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.room-content h5 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.room-content p {
+    font-size: 18px;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.roomButton {
+    font-size: 18px;
+    padding: 12px 24px;
+    margin-top: auto; 
+}
+
+@media (max-width: 768px) {
+    .room-card {
+        flex-basis: 100%; 
+    }
+}
+.slider-wrapper {
+  max-width: 60%;
+  margin: 30px auto;
+   }
+  .swiper-container {
+     width: 50%;
+   height: 100px;
+   }                   
+   .swiper-slide img {
+     width: 100%;
+    height: 100%;
+    object-fit: cover;
+  border-radius: 10px;
+   }
+ .book-section {
+   display: flex;
+  flex-direction: column;
+   align-items: center;
+    text-align: center;
+     }
     
-        .slider-wrapper {
-            max-width: 60%;
-            margin: 30px auto;
-        }
+  .slider-wrapper {
+     max-width: 60%;
+    margin: 30px auto;
+     }
         
-        .swiper-container {
-            width: 50%;
-            height: 100px;
-        }
+  .swiper-container {
+    width: 50%;
+    height: 100px;
+   }
         
-        .swiper-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-        }
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+     }
     </style>
     
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
