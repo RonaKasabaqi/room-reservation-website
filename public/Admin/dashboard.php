@@ -1,10 +1,11 @@
 <?php
+include("../../config/DatabaseConnection.php");
 session_start();
-if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
-    header("Location: ../log-in.php");
-    exit();
+if (!isset($_SESSION["email"])) {
+    echo "Ju nuk jeni i identifikuar. Ju lutemi <a href='../log-in.php'>kyçuni këtu</a> për të vazhduar.";
+    exit(); 
 }
-include('C:\xampp\htdocs\room-reservation-website-1\config\DatabaseConnection.php');
+$perdoruesi = htmlspecialchars($_SESSION["fullname"] ?? $_SESSION["email"]);
 
 $sql = "SELECT * FROM content";
 $result = mysqli_query($conn, $sql);

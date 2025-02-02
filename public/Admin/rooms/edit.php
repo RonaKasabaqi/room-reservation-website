@@ -1,8 +1,11 @@
 <?php 
-require_once "../../../config/DatabaseConnection.php";
+include("../../../config/DatabaseConnection.php");
 session_start();
-
-// Kontrollo nëse përdoruesi është kyçur si admin
+if (!isset($_SESSION["email"])) {
+    echo "Ju nuk jeni i identifikuar. Ju lutemi <a href='../../log-in.php'>kyçuni këtu</a> për të vazhduar.";
+    exit(); 
+}
+$perdoruesi = htmlspecialchars($_SESSION["fullname"] ?? $_SESSION["email"]);
 if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
     // Përdoruesi nuk është i kyçur si admin, ridrejto te login.php
     header("Location: ../log-in.php");

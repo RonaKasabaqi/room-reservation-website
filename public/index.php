@@ -6,11 +6,7 @@ if (!isset($_SESSION["email"])) {
     exit(); 
 }
 $perdoruesi = htmlspecialchars($_SESSION["fullname"] ?? $_SESSION["email"]);
-echo "<script>
-    alert('Mirë se vini, $perdoruesi!');
-</script>";
 
-include('../config/DatabaseConnection.php');
 
 $sql = "SELECT * FROM content";
 $result = mysqli_query($conn, $sql);

@@ -5,6 +5,7 @@ if (!isset($_SESSION["email"])) {
     echo "Ju nuk jeni i identifikuar. Ju lutemi <a href='log-in.php'>kyçuni këtu</a> për të vazhduar.";
     exit(); 
 }
+$perdoruesi = htmlspecialchars($_SESSION["fullname"] ?? $_SESSION["email"]);
 $sqlRooms = "SELECT id, name FROM rooms";
 $resultRooms = mysqli_query($conn, $sqlRooms);
 
